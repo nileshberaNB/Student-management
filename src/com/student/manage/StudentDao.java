@@ -3,6 +3,8 @@ package com.student.manage;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class StudentDao {
 
@@ -20,6 +22,54 @@ public class StudentDao {
 
             pstmt.executeUpdate();
             f=true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+    public static boolean deleteStudent(int userID) {
+        boolean f=false;
+        try{
+
+            Connection con = CP.createC();
+            String q="delete from student where sid=?";
+            PreparedStatement pstmt = con.prepareStatement(q);
+            pstmt.setInt(1, userID);
+            pstmt.executeUpdate();
+            f=true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+    public static boolean showAllStudent() {
+        boolean f=false;
+        try{
+
+            Connection con = CP.createC();
+            String q="select * from students;";
+            Statement stmt = con.createStatement();
+            
+
+            ResultSet set=stmt.executeQuery(q);
+            while(set.next())
+            {
+                int id=set.getInt(1);
+                
+                String name=set.getString(2);
+                
+                String phone=set.getString(3);
+                
+                String city=set.getString("scity");
+
+                System.out.println("ID : "+ id);
+                System.out.println("Name : "+ name);
+                System.out.println("Phone : "+ phone);
+                System.out.println("ID : "+ city);
+                System.out.println("===============================");
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -34,17 +34,25 @@ public class Start {
 					System.out.println("Student is added successfully...");
 				}else
 				{
-					System.out.println("wrong try again");
+					System.out.println("Something went wrong try again");
 				}
 
 				System.out.println(st);
 
 			}else if(c==2)
 			{
-
+				System.out.println("Enter student ID you want to delete:");
+				int userID=Integer.parseInt(br.readLine());
+				boolean f=StudentDao.deleteStudent(userID);
+				if(f)
+				{
+					System.out.println("Deleted...");
+				}else{
+					System.out.println("Something went wrong.....");
+				}
 			}else if(c==3)
 			{
-
+				StudentDao.showAllStudent();
 			}else if(c==4)
 			{
 
